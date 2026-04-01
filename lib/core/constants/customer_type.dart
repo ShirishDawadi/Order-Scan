@@ -1,0 +1,1 @@
+enum CustomerType { dealer, retail }
