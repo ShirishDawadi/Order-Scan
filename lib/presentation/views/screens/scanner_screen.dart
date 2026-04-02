@@ -48,22 +48,68 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
             ),
             const SizedBox(height: 20),
             if (scannerState.barcode.isNotEmpty)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Scanned Barcode: ${scannerState.barcode}'),
-                  Text('Product Name: ${scannerState.productName}'),
-                  Text('Status: ${scannerState.status}'),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () => scannerVM.clear(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                    ),
-                    child: const Text('Clear'),
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Product Info',
+                         style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold
+                         )
+                         ),
+                      const SizedBox(height: 10,),
+
+                      Text('Name: ${scannerState.productName}'),
+                      const SizedBox(height: 8,),
+                      Text('Scanned Barcode: ${scannerState.barcode}'),
+                      const SizedBox(height: 8,),
+                      Row(
+                        children: [
+                          Text('Status:'),
+                          SizedBox(width: 8,),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: scannerState.status == 'Valid'
+                                  ? Colors.green.shade100
+                                  : Colors.red.shade100,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              scannerState.status,
+                              style: TextStyle(
+                                color: scannerState.status == 'Valid'
+                                    ? Colors.green.shade800
+                                    : Colors.red.shade800,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: ElevatedButton(
+                          onPressed: () => scannerVM.clear(),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                          ),
+                          child: const Text('Clear'),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
           ],
         ),
