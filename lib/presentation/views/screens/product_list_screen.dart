@@ -4,6 +4,7 @@ import 'package:order_scan/core/constants/customer_type.dart';
 import 'package:order_scan/presentation/viewmodels/customer_viewmodel.dart';
 import 'package:order_scan/presentation/viewmodels/product_viewmodel.dart';
 import 'package:order_scan/core/utils/price_calculator.dart';
+import 'package:order_scan/presentation/views/screens/order_screen.dart';
 
 class ProductListScreen extends ConsumerWidget {
   const ProductListScreen({super.key});
@@ -42,9 +43,7 @@ class ProductListScreen extends ConsumerWidget {
                 ],
                 onChanged: (type) {
                   if (type != null) {
-                    ref
-                        .read(customerProvider.notifier)
-                        .setCustomerType(type);
+                    ref.read(customerProvider.notifier).setCustomerType(type);
                   }
                 },
               ),
@@ -111,7 +110,14 @@ class ProductListScreen extends ConsumerWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => OrderScreen(product: product),
+                          ),
+                        );
+                      },
                       child: const Text('Order'),
                     ),
                   ],
