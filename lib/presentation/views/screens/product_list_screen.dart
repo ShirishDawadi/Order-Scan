@@ -5,6 +5,7 @@ import 'package:order_scan/presentation/viewmodels/customer_viewmodel.dart';
 import 'package:order_scan/presentation/viewmodels/product_viewmodel.dart';
 import 'package:order_scan/core/utils/price_calculator.dart';
 import 'package:order_scan/presentation/views/screens/order_screen.dart';
+import 'package:order_scan/presentation/views/screens/scanner_screen.dart';
 
 class ProductListScreen extends ConsumerWidget {
   const ProductListScreen({super.key});
@@ -128,7 +129,12 @@ class ProductListScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => ScannerScreen()),
+          );
+        },
         icon: const Icon(Icons.qr_code_scanner),
         label: const Text('Scan'),
       ),
